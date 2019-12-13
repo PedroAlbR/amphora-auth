@@ -25,7 +25,11 @@ const _isEmpty = require('lodash/isEmpty'),
  * @returns {boolean}
  */
 function isProtectedRoute(req) {
-  return !!req.query.edit || !_includes(req.originalUrl, '/_auth') && req.method !== 'GET';
+  return (
+    !!req.query.edit
+    || !_includes(req.originalUrl, '/_auth')
+    && !_includes(['GET', 'HEAD'], req.method)
+  );
 }
 
 /**
